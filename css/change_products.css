@@ -1,0 +1,111 @@
+/* Syling the Footer */
+.footer-format {
+    border-top: 2px solid lightgrey;
+    padding: 10px;
+    margin-top: 5%;
+}
+
+.home-fonts {
+    font-family: "Nunito", sans-serif;
+}
+
+.register-row-text-center {
+    text-align: center;
+    position: relative;
+}
+
+.add-style {
+    background-color: #0D0A0B;
+    color: #FAF9F6;
+    padding-top: 12.5%;
+    padding-bottom: 12.5%;
+    font-size: 40px;
+    border-bottom: 2px solid #FAF9F6;
+    /* #F57C73 */
+    /* #531DFB */
+}
+
+.delete-style {
+    background-color: #0D0A0B;
+    color: #FAF9F6;
+    padding-top: 12.5%;
+    padding-bottom: 12.5%;
+    font-size: 40px;
+    border-top: 2px solid #FAF9F6;
+    /* #F57C73 */
+    /* #531DFB */
+}
+
+.text-styling {
+    color: #FAF9F6;
+    text-decoration: none;
+}
+
+.text-styling:hover {
+    color: #F57C73;
+    font-weight: bold;
+}
+
+.add-style:hover {
+    font-weight: bold;
+    /* background-color: #F57C73; */
+}
+
+.delete-style:hover {
+    font-weight: bold;
+    /* background-color: #F57C73; */
+}
+
+
+/* The following CSS rules are added only when screen size is 768px and above */
+@media(min-width: 768px) {
+    
+    .add-style {
+        padding-top: 25%;
+        padding-bottom: 25%;
+        font-size: 40px;
+        border-bottom: hidden;
+        border-right: 2px solid #FAF9F6;
+        /* #F57C73 */
+        /* #531DFB */
+    }
+    
+    .delete-style {
+        padding-top: 25%;
+        padding-bottom: 25%;
+        font-size: 40px;
+        border-top: hidden;
+        border-left: 2px solid #FAF9F6;
+        /* #F57C73 */
+        /* #531DFB */
+    }
+
+    .footer-format {
+        margin-top: 3%;
+    }
+}
+
+/* The following CSS rules are added only when screen size is 992px and above */
+@media(min-width: 992px) {
+
+    .add-style {
+        padding-top: 17.5%;
+        padding-bottom: 17.5%;
+        font-size: 40px;
+        /* #F57C73 */
+        /* #531DFB */
+    }
+    
+    .delete-style {
+        padding-top: 17.5%;
+        padding-bottom: 17.5%;
+        font-size: 40px;
+        /* #F57C73 */
+        /* #531DFB */
+    }
+
+    .footer-format {
+        margin-top: 2%;
+    }
+}
+

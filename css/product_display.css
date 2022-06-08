@@ -1,0 +1,143 @@
+.main-div {
+    font-family: "Nunito", sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+.prod-rows-center {
+    text-align: center;
+}
+
+.prod-details-styling {
+    font-size: 110%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    color: #0D0A0B;
+}
+
+.last-prod-row-styling {
+    margin-bottom: 7%;
+}
+
+.product-name-styling {
+    color: #0D0A0B;
+    text-decoration: underline;
+}
+
+.product-name-styling:hover {
+    color: #F57C73;
+    font-weight: bold;
+}
+
+.btn-color {
+    background-color: #531DFB;
+    color: #FAF9F6;
+    font-size: 1.25rem;
+}
+
+.footer-format {
+    border-top: 2px solid lightgrey;
+    padding: 10px;
+    margin-top: 5%;
+}
+
+.img-div {
+    width: 60%;
+    box-sizing: border-box;
+    padding: 1%;
+    margin: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+}
+
+.img-div img {
+    width: 100%;
+}
+
+.option-header {
+    font-weight: bold;
+    margin-bottom: 1%;
+    font-size: 120%;
+    text-decoration: underline;
+}
+
+.option-header:hover {
+    color: #F57C73;
+}
+
+.options-border {
+    border-right: 1px solid #531DFB;
+    border-top: 1px solid #531DFB;
+}
+
+.prod-rows-border {
+    border-top: 1px solid #531DFB;
+}
+
+.dropdown-spacing {
+    /* padding-bottom: 5%; */
+    margin-left: 0;
+    margin-bottom: 7.5%;
+}
+
+.client-input-form-width{
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+
+.search-padding {
+    padding: 0;
+}
+
+.maufacturers-spacing {
+    margin-top: 2%;
+}
+
+
+.filter-buttton-spacing {
+    margin-top: 5%;
+}
+
+/* The following CSS rules are added only when screen size is 768px and above */
+@media(min-width: 768px) {
+    .img-div {
+        width: 100%;
+    }
+
+    .prod-details-styling {
+        font-size: 120%;
+        margin-top: 2.5%;
+        margin-bottom: 1%;
+    }
+
+    .prod-rows-center {
+        text-align: start;
+    }
+
+    .maufacturers-spacing {
+        margin-top: 8%;
+    }
+}
+
+/* The following CSS rules are added only when screen size is 992px and above */
+@media(min-width: 992px) {
+    .prod-details-styling {
+        font-size: 120%;
+        margin-top: 4%;
+        margin-bottom: 1%;
+    }
+
+    .option-header {
+        margin-bottom: 1%;
+        font-size: 130%;
+    }
+
+    .maufacturers-spacing {
+        margin-top: 5%;
+    }
+
+}

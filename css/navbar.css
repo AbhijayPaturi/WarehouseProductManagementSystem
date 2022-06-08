@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FAF9F6;
+}
+.my-color {
+    background-color: #FAF9F6;
+    size: 50px;
+}
+
+.navbar-text-color {
+    color: #531DFB;
+}
+
+.navbar-text-size {
+    font-size: 20px;
+}
+
+.navbar-text-color-active {
+    color: #F57C73;
+    font-weight: bold; 
+}
+
+.navbar-text-color:hover {
+    color: #F57C73;
+}
+
+.navtext-padding {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.nav-outer-text-padding {
+    margin-right: 10px;
+}
+
+.nav-brand-padding {
+    margin-left: 20px;
+}
+
+/* The following CSS rules are added only when screen size is 768px and above */
+@media(min-width: 768px) {
+    .navbar-text-size {
+        font-size: 19px;
+    }
+}
+
+/* The following CSS rules are added only when screen size is 992px and above */
+@media(min-width: 992px) {
+    .navbar-text-size {
+        font-size: 22px;
+    }
+
+}

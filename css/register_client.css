@@ -1,0 +1,136 @@
+.register-row-text-center {
+    text-align: center;
+    position: relative;
+}
+
+.register-row-text-center .client-name-spacing {
+    /* margin: 0; */
+    font-size: 25px;
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px; */
+}
+
+.home-fonts {
+    font-family: "Nunito", sans-serif;
+}
+
+.client-form-text {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+}
+
+.form-rounded {
+    font-size: 22px;
+    border-radius: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 125px;
+    margin-top: 3%;
+}
+
+.footer-format {
+    border-top: 2px solid lightgrey;
+    padding: 10px;
+    margin-top: 5%;
+}
+
+.submit-button-colors {
+    background-color: #531DFB;
+    color: #FAF9F6;
+    opacity: 50%;
+}
+
+.submit-button-colors:hover {
+    background-color: #F57C73;
+    color: #0D0A0B;
+    opacity: 100%;
+}
+
+.client-name-spacing { 
+    margin-top: 6.5%;
+}
+
+.error-message {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.italics-msg {
+    font-style: italic;
+}
+
+.img-div {
+    width: 60%;
+    box-sizing: border-box;
+    padding: 1%;
+    margin: 1%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-div img {
+    width: 100%;
+}
+
+.button-rounded-error {
+    margin-top: 2%;
+}
+
+.button-rounded-success {
+    margin-top: 0%;
+}
+
+/* The following CSS rules are added only when screen size is 768px and above */
+@media(min-width: 768px) {
+    .img-div {
+        width: 45%;
+        box-sizing: border-box;
+        padding: 1%;
+        margin: 1%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .error-message {
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    .client-name-spacing { 
+        margin-top: 5%;
+    }
+}
+
+/* The following CSS rules are added only when screen size is 992px and above */
+@media(min-width: 992px) {
+     .img-div {
+        width: 32%;
+        box-sizing: border-box;
+        padding: 1%;
+        margin: 1%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .form-rounded {
+        margin-top: 1%;
+    }
+
+    .button-rounded-success {
+        margin-top: 0%;
+    }
+
+    .error-message {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    .client-name-spacing { 
+        margin-top: 1%;
+    }
+
+}
