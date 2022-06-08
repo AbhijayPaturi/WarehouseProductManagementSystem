@@ -1,7 +1,6 @@
 <?php
 	require "../config/config.php";
 	$isInserted = false;
-
 	if ( !isset($_POST['client_name']) || 
 	empty($_POST['client_name']) ) 
 	{
@@ -13,21 +12,18 @@
 			echo $mysqli->error;
 			exit();
 		}
-
 	$sql_clients = "SELECT * FROM clients;";
 	$results_clients = $mysqli->query($sql_clients);
 	if ( $results_clients == false ) {
 	    echo $mysqli->error;
 	    exit();
 	}
-
 	$found = false;
 	while(($row = $results_clients->fetch_assoc()) && $found == false) {
 	    if ($row["client_name"] == $_POST["client_name"]) {
 		$found = true;
 	    }
 	}
-
 	if (!$found) {
 	    $statement = $mysqli->prepare("INSERT INTO clients(client_name) VALUES(?);");
 	    $statement->bind_param("s", $_POST["client_name"]); 
@@ -35,23 +31,19 @@
 	    if (!$executed) {
 		$error = $mysqli->error;
 	    }
-
 	    if($mysqli->affected_rows == 1) {
 		$isInserted = true;
 	    }
 	    else {
 		$error = "There was an error with this add action. Please try again.";
 	    }
-
 	}
 	else {
 	    $error = "Are you sure you are NOT a client ALREADY? <br><strong>Please try again!</strong>";
 	}
-
 		$mysqli->close();
 	}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +83,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container-fluid">
         <form action="home.php" method="POST">
             <div class="row">
@@ -130,10 +121,8 @@
                 </div>
             </div> 
         </form>
-    </div>
-    
+    </div>   
     <?php include 'footer.php'; ?>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
