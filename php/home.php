@@ -46,7 +46,6 @@
             </div>
         </div>
     </div>
-
     <div class="container-fluid"> 
         <form action="register_client.php" method="POST">
             <div class="row row-margins">
@@ -61,7 +60,6 @@
             </div> 
         </form>
     </div>
-
     <div class="container-fluid">
         <div class="row">
             <div class="col col-12 register-row-text-center home-fonts about-info">
