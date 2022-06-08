@@ -3,7 +3,6 @@
     background-position: left center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* opacity: 30%; */
     height: 300px;
     position: relative;
     box-sizing: border-box;
@@ -124,8 +123,6 @@
     margin-bottom: 2%;
 }
 
-
-/* The following CSS rules are added only when screen size is 768px and above */
 @media(min-width: 768px) {
     .client-input-form-width {
         width: 400px;
@@ -133,7 +130,6 @@
 
 }
 
-/* The following CSS rules are added only when screen size is 992px and above */
 @media(min-width: 992px) {
 
     .background-stuff { 
