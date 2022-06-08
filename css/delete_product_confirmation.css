@@ -1,17 +1,9 @@
 .register-row-text-center {
     text-align: center;
-    /* position: relative; */
 }
 
 .register-row-text-center .client-name-spacing {
-    /* margin: 0; */
     font-size: 25px;
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px; */
-    /* margin-top: 500px; */
 }
 
 .home-fonts {
@@ -70,7 +62,6 @@
     margin-top: 0%;
 }
 
-/* The following CSS rules are added only when screen size is 768px and above */
 @media(min-width: 768px) {
     .img-div {
         width: 45%;
@@ -87,7 +78,6 @@
     }
 }
 
-/* The following CSS rules are added only when screen size is 992px and above */
 @media(min-width: 992px) {
      .img-div {
         width: 32%;
@@ -114,5 +104,4 @@
         margin-top: 1%;
         margin-bottom: 1%;
     }
-
 }
