@@ -1,23 +1,23 @@
 <?php
 	require "../config/config.php";
 	$isAdded = false;
-    $already = false;
+	$already = false;
 
 	if ( !isset($_POST['product_name']) || 
 	empty($_POST['product_name']) || 
-    !isset($_POST['product_quantity']) || 
+	!isset($_POST['product_quantity']) || 
 	empty($_POST['product_quantity']) || 
-    !isset($_POST['product_price']) || 
+	!isset($_POST['product_price']) || 
 	empty($_POST['product_price']) || 
-    !isset($_POST['warehouse_aisle']) || 
+	!isset($_POST['warehouse_aisle']) || 
 	empty($_POST['warehouse_aisle']) || 
-    !isset($_POST['product_model']) || 
+	!isset($_POST['product_model']) || 
 	empty($_POST['product_model']) || 
-    !isset($_POST['product_category_id']) || 
+	!isset($_POST['product_category_id']) || 
 	empty($_POST['product_category_id']) || 
-    !isset($_POST['product_manufacturer_id']) || 
+	!isset($_POST['product_manufacturer_id']) || 
 	empty($_POST['product_manufacturer_id']) || 
-    !isset($_POST['product_condition_id']) || 
+	!isset($_POST['product_condition_id']) || 
 	empty($_POST['product_condition_id']) ) 
 	{
 		$error = "Please fill out the required fields.";
@@ -27,42 +27,42 @@
 		if ( $mysqli->errno ) {
 			echo $mysqli->error;
 			exit();
-		}
-
-        $sql_check = "SELECT * FROM products WHERE name LIKE '" . $_POST['product_name'] . "' AND price=" . $_POST['product_price'] ." AND model LIKE '" . $_POST['product_model'] . "' AND categories_id=" . $_POST['product_category_id'] . " AND manufacturers_id=" . $_POST['product_manufacturer_id'] . " AND conditions_id=" . $_POST['product_condition_id'] . ";";
-        $results_check = $mysqli->query($sql_check);
-        if ( $results_check == false ) {
-            echo $mysqli->error;
-            exit();
-        }
-
-        if ($results_check->fetch_assoc() == null) {
-            if ( isset($_POST['product_features']) && !empty($_POST['product_features']) ) {
-                $product_features = $_POST['product_features'];
-            } else {
-                $product_features = NULL;
-            }
-		
-            $statement = $mysqli->prepare("INSERT INTO products(name, quantity, warehouse_section, price, model, features, categories_id, manufacturers_id, conditions_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);");
-            $statement->bind_param("sisdssiii", $_POST["product_name"], $_POST["product_quantity"], $_POST["warehouse_aisle"], $_POST["product_price"], $_POST["product_model"], $product_features, $_POST["product_category_id"], $_POST["product_manufacturer_id"], $_POST["product_condition_id"]); 
-            $executed = $statement->execute();
-            if (!$executed) {
-                $error = $mysqli->error;
-            }
-            if($mysqli->affected_rows == 1) {
-                $isAdded = true;
-            }
-            else {
-                $error = "There was an error with this add action.<br> Please try again.";
-            }
-        } 
-        else 
-        {
-            $error = "This product is ALREADY in the warehouse! <br><strong>Please try to add a NEW product!</strong>";
-            $already = true;
-        }       
-		$mysqli->close();
 	}
+
+	$sql_check = "SELECT * FROM products WHERE name LIKE '" . $_POST['product_name'] . "' AND price=" . $_POST['product_price'] ." AND model LIKE '" . $_POST['product_model'] . "' AND categories_id=" . $_POST['product_category_id'] . " AND manufacturers_id=" . $_POST['product_manufacturer_id'] . " AND conditions_id=" . $_POST['product_condition_id'] . ";";
+	$results_check = $mysqli->query($sql_check);
+	if ( $results_check == false ) {
+	    echo $mysqli->error;
+	    exit();
+	}
+
+	if ($results_check->fetch_assoc() == null) {
+	    if ( isset($_POST['product_features']) && !empty($_POST['product_features']) ) {
+		$product_features = $_POST['product_features'];
+	    } else {
+		$product_features = NULL;
+	    }
+
+	    $statement = $mysqli->prepare("INSERT INTO products(name, quantity, warehouse_section, price, model, features, categories_id, manufacturers_id, conditions_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);");
+	    $statement->bind_param("sisdssiii", $_POST["product_name"], $_POST["product_quantity"], $_POST["warehouse_aisle"], $_POST["product_price"], $_POST["product_model"], $product_features, $_POST["product_category_id"], $_POST["product_manufacturer_id"], $_POST["product_condition_id"]); 
+	    $executed = $statement->execute();
+	    if (!$executed) {
+		$error = $mysqli->error;
+	    }
+	    if($mysqli->affected_rows == 1) {
+		$isAdded = true;
+	    }
+	    else {
+		$error = "There was an error with this add action.<br> Please try again.";
+	    }
+	} 
+	else 
+	{
+	    $error = "This product is ALREADY in the warehouse! <br><strong>Please try to add a NEW product!</strong>";
+	    $already = true;
+	}       
+		$mysqli->close();
+      }
 ?>
 
 <!DOCTYPE html>
@@ -117,7 +117,6 @@
                                     <img src="../pictures/success_picture.jpeg" alt="Success Image">
                             </div>
                         <?php endif; ?>
-
                         <div class="client-name-spacing">
                             <?php if ( isset($error) && !empty($error) ) : ?>
                                 <div class="text-danger font-italic">
@@ -127,13 +126,11 @@
                                         <div id="msg"><span class="font-italic italics-msg"><?php $_POST["product_name"];?></span> Has NOT Been Successfully Added.<br>Press Back and Try Again!</div>
                                     <?php endif; ?>
                             <?php endif; ?>
-
                             <?php if ($isAdded) : ?>
                                 <div class="text-success error-message">
                                     <div><span class="font-italic italics-msg"><?php echo $_POST["product_name"];?></span> Has Been Successfully Added!</div>
                                 </div>
-                            <?php endif; ?>
-                            
+                            <?php endif; ?>                         
                             <?php if ( isset($error) && !empty($error) ) : ?>
                                 <!-- <a href="home.php" class="btn btn-primary submit-button-colors button-rounded-error home-fonts">Home</a> -->
                                 <a href="home.php" class="btn btn-primary submit-button-colors button-rounded-error home-fonts">Home</a>
@@ -144,14 +141,12 @@
                             <?php endif; ?>
                         </div>
                 </div>
-            </div> 
-        
+            </div>       
     </div>
 
     <?php include 'footer.php'; ?>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
 </body>
 </html>
 
