@@ -5,7 +5,6 @@
         echo $mysqli->error;
         exit();
     }
-
     $sql_clients = "SELECT * FROM clients;";
     $results_clients = $mysqli->query($sql_clients);
     if ( $results_clients == false ) {
