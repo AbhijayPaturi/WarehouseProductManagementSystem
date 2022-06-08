@@ -1,5 +1,4 @@
 <?php
-    // var_dump($_POST);
 	require "../config/config.php";
 	$isAdded = false;
     $already = false;
@@ -22,7 +21,6 @@
 	empty($_POST['product_condition_id']) ) 
 	{
 		$error = "Please fill out the required fields.";
-        // $isAdded = true;
 	}
 	else {
 		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -37,25 +35,20 @@
             echo $mysqli->error;
             exit();
         }
-        // var_dump($results_check->fetch_assoc());
 
         if ($results_check->fetch_assoc() == null) {
-
-            // Handling the optional fields 
             if ( isset($_POST['product_features']) && !empty($_POST['product_features']) ) {
                 $product_features = $_POST['product_features'];
             } else {
                 $product_features = NULL;
             }
-
-            // ---- Prepared Statements 
+		
             $statement = $mysqli->prepare("INSERT INTO products(name, quantity, warehouse_section, price, model, features, categories_id, manufacturers_id, conditions_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);");
             $statement->bind_param("sisdssiii", $_POST["product_name"], $_POST["product_quantity"], $_POST["warehouse_aisle"], $_POST["product_price"], $_POST["product_model"], $product_features, $_POST["product_category_id"], $_POST["product_manufacturer_id"], $_POST["product_condition_id"]); 
             $executed = $statement->execute();
             if (!$executed) {
                 $error = $mysqli->error;
             }
-
             if($mysqli->affected_rows == 1) {
                 $isAdded = true;
             }
@@ -67,16 +60,8 @@
         {
             $error = "This product is ALREADY in the warehouse! <br><strong>Please try to add a NEW product!</strong>";
             $already = true;
-        }
-                            
-		// Close 
+        }       
 		$mysqli->close();
-	
-
-        // $error = "hi";
-        // $isAdded = true;
-
-
 	}
 ?>
 
@@ -96,7 +81,6 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light my-color sticky-top">
-        <!-- Container that is fluid -->
         <div class="container-fluid">
             <a class="navbar-brand nav-brand-padding fs-2" href="home.php"><strong class="navbar-text-color">WPMS</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,10 +106,8 @@
     </nav>
 
     <div class="container-fluid">
-        
             <div class="row">
                 <div class="col col-12 register-row-text-center">
-
                         <?php if ( isset($error) && !empty($error) ) : ?>
                             <div class="register-row-text-center img-div">
                                     <img src="../pictures/error_picture.jpeg" alt="Error Image">
