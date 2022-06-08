@@ -102,7 +102,6 @@ ul {
     margin-top: 5%;
 }
 
-/* The following CSS rules are added only when screen size is 768px and above */
 @media(min-width: 768px) {
     .img-div {
         width: 100%;
@@ -123,7 +122,6 @@ ul {
     }
 }
 
-/* The following CSS rules are added only when screen size is 992px and above */
 @media(min-width: 992px) {
     .prod-details-styling {
         font-size: 120%;
@@ -139,5 +137,4 @@ ul {
     .maufacturers-spacing {
         margin-top: 5%;
     }
-
 }
