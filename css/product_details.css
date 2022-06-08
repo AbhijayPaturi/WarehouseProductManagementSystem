@@ -39,14 +39,12 @@ body {
 
 .secondary-details {
     font-size: 20px;
-    /* padding-bottom: 2.5%; */
     box-sizing: border-box;
     margin-bottom: 0;
 }
 
 .bullet-list-div {
     font-size: 20px;
-    /* padding-bottom: 2.5%; */
     box-sizing: border-box;
     margin-bottom: 0;
     margin-top: 2%;
@@ -85,7 +83,6 @@ body {
     margin-top: 5%;
 }
 
-/* The following CSS rules are added only when screen size is 768px and above */
 @media(min-width: 768px) {
     .img-div {
         width: 90%;
@@ -127,11 +124,8 @@ body {
         opacity: 50%;
         margin-top: 0;
     }
-    
-
 }
 
-/* The following CSS rules are added only when screen size is 992px and above */
 @media(min-width: 992px) {
     .img-div {
         width: 50%;
