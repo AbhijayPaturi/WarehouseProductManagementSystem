@@ -1,13 +1,12 @@
 <?php
-    // var_dump($_POST);
 	require "../config/config.php";
 	$isInserted = false;
 
 	if ( !isset($_POST['client_name']) || 
 	empty($_POST['client_name']) || 
-    !isset($_POST['product_name']) || 
+	!isset($_POST['product_name']) || 
 	empty($_POST['product_name']) || 
-    !isset($_POST['quantity_shipped']) || 
+	!isset($_POST['quantity_shipped']) || 
 	empty($_POST['quantity_shipped']) ) 
 	{
 		$error = "Please fill out the required fields.";
@@ -18,116 +17,81 @@
 			echo $mysqli->error;
 			exit();
 		}
+	$statement_num_product = $mysqli->prepare("SELECT * FROM products WHERE id = ?;");
+	$statement_num_product->bind_param("i", $_POST["product_name"]);
+	$statement_num_product->execute();
 
-        // var_dump($_POST["product_name"]);
-        // var_dump($_POST["client_name"]);
-        // var_dump($_POST["quantity_shipped"]);
+	$results_num_product=$statement_num_product->get_result();
+	$prod_db_name = null;
+	$prod_db_quantity = null;
+	if ($results_num_product->num_rows == 1) {
+	    $row = $results_num_product->fetch_assoc();
+	    $prod_db_name = $row["name"];
+	    $prod_db_quantity = $row["quantity"];
+	}
+	$statement_num_product->close();
 
-        // $sql_clients = "SELECT * FROM clients;";
-        // $results_clients = $mysqli->query($sql_clients);
-        // if ( $results_clients == false ) {
-        //     echo $mysqli->error;
-        //     exit();
-        // }
+	$statement_client_name = $mysqli->prepare("SELECT client_name FROM clients WHERE id = ?;");
+	$statement_client_name->bind_param("i", $_POST["client_name"]);
+	$statement_client_name->execute();
 
-        // var_dump($results_clients);
-        // $results_clients->data_seek(0);
+	$results_client_name=$statement_client_name->get_result();
+	$client_db_name = null;
+	if ($results_client_name->num_rows == 1) {
+	    $row = $results_client_name->fetch_assoc();
+	    $client_db_name = $row["client_name"];
+	}
+	$statement_client_name->close();
 
-        // $found = false;
-        // while(($row = $results_clients->fetch_assoc()) && $found == false) {
-        //     if ($row["client_name"] == $_POST["client_name"]) {
-        //         $found = true;
-        //     }
-        // }
+	if ($prod_db_quantity != null) {
+	    if ($_POST["quantity_shipped"] <= $prod_db_quantity) {
+		$statement = $mysqli->prepare("UPDATE products SET quantity = quantity - ? WHERE id = ?;");
+		$statement->bind_param("ii", $_POST["quantity_shipped"], $_POST["product_name"]); 
+		$executed = $statement->execute();
+		if (!$executed) {
+		    $error = $mysqli->error;
+		}
 
-        // ---- Prepared Statements 
-        // Statement 1: Get the product name
-        $statement_num_product = $mysqli->prepare("SELECT * FROM products WHERE id = ?;");
-        $statement_num_product->bind_param("i", $_POST["product_name"]);
-        $statement_num_product->execute();
+		if($mysqli->affected_rows == 1) {
+		    $isUpdated = true;
+		}
+		else {
+		    $error = "There was an error with this update action. Please try again.";
+		}
+		$statement->close();
 
-        $results_num_product=$statement_num_product->get_result();
-        $prod_db_name = null;
-        $prod_db_quantity = null;
-        if ($results_num_product->num_rows == 1) {
-            $row = $results_num_product->fetch_assoc();
-            $prod_db_name = $row["name"];
-            $prod_db_quantity = $row["quantity"];
-        }
-        $statement_num_product->close();
+		$statement_check_many = $mysqli->prepare("SELECT * FROM products_has_clients WHERE products_id = ? AND clients_id = ?;");
+		$statement_check_many->bind_param("ii", $_POST["product_name"], $_POST["client_name"]);
+		$statement_check_many->execute();
 
-        // Statement 2: Get the client name
-        $statement_client_name = $mysqli->prepare("SELECT client_name FROM clients WHERE id = ?;");
-        $statement_client_name->bind_param("i", $_POST["client_name"]);
-        $statement_client_name->execute();
+		$results_check_many=$statement_check_many->get_result();
+		if ($results_check_many->num_rows == 0) {
+		    $statement = $mysqli->prepare("INSERT INTO products_has_clients(products_id, clients_id) VALUES(?, ?);");
+		    $statement->bind_param("ii", $_POST["product_name"], $_POST["client_name"]); 
+		    $executed = $statement->execute();
+		    if (!$executed) {
+			$error = $mysqli->error;
+		    }
 
-        $results_client_name=$statement_client_name->get_result();
-        $client_db_name = null;
-        if ($results_client_name->num_rows == 1) {
-            $row = $results_client_name->fetch_assoc();
-            $client_db_name = $row["client_name"];
-        }
-        $statement_client_name->close();
+		    if($mysqli->affected_rows == 1) {
+			$isUpdated = true;
+		    }
+		    else {
+			$error = "There was an error with this update action. Please try again.";
+		    }
+		}
+		$statement_check_many->close();
 
-        if ($prod_db_quantity != null) {
-            if ($_POST["quantity_shipped"] <= $prod_db_quantity) {
-                // Statement 4: Update the quantity 
-                $statement = $mysqli->prepare("UPDATE products SET quantity = quantity - ? WHERE id = ?;");
-                $statement->bind_param("ii", $_POST["quantity_shipped"], $_POST["product_name"]); 
-                $executed = $statement->execute();
-                if (!$executed) {
-                    $error = $mysqli->error;
-                }
-    
-                if($mysqli->affected_rows == 1) {
-                    $isUpdated = true;
-                }
-                else {
-                    $error = "There was an error with this update action. Please try again.";
-                }
-                $statement->close();
-    
-                // Statement 5: Update the many to many table 
-                // First, see if an entry of the client and product exists already 
-                $statement_check_many = $mysqli->prepare("SELECT * FROM products_has_clients WHERE products_id = ? AND clients_id = ?;");
-                $statement_check_many->bind_param("ii", $_POST["product_name"], $_POST["client_name"]);
-                $statement_check_many->execute();
+	    }
+	    else {
+		$error = "Sorry! We do not have enough <em>" . $prod_db_name . "</em>in the warehouse right now!";
+	    }
+	}
+	else {
+	    $error = "Sorry! Not a valid product quantity entered. Please try again!";
+	}
 
-                $results_check_many=$statement_check_many->get_result();
-                if ($results_check_many->num_rows == 0) {
-                    // If the row does not exist, add it to the table 
-                    $statement = $mysqli->prepare("INSERT INTO products_has_clients(products_id, clients_id) VALUES(?, ?);");
-                    $statement->bind_param("ii", $_POST["product_name"], $_POST["client_name"]); 
-                    $executed = $statement->execute();
-                    if (!$executed) {
-                        $error = $mysqli->error;
-                    }
-        
-                    if($mysqli->affected_rows == 1) {
-                        $isUpdated = true;
-                    }
-                    else {
-                        $error = "There was an error with this update action. Please try again.";
-                    }
-                }
-                $statement_check_many->close();
-    
-            }
-            else {
-                $error = "Sorry! We do not have enough <em>" . $prod_db_name . "</em>in the warehouse right now!";
-            }
-        }
-        else {
-            $error = "Sorry! Not a valid product quantity entered. Please try again!";
-        }
-        
-                            
-		// Close 
-		$mysqli->close();
-
-        // $error = "hi";
-        // $isUpdated = true;
-
+	    $mysqli->close();
 	}
 ?>
 
@@ -147,7 +111,6 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light my-color sticky-top">
-        <!-- Container that is fluid -->
         <div class="container-fluid">
             <a class="navbar-brand nav-brand-padding fs-2" href="home.php"><strong class="navbar-text-color">WPMS</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -176,7 +139,6 @@
         <form action="make_shipment.php" method="POST">
             <div class="row">
                 <div class="col col-12 register-row-text-center">
-
                         <?php if ( isset($error) && !empty($error) ) : ?>
                             <div class="register-row-text-center img-div">
                                     <img src="../pictures/error_picture.jpeg" alt="Error Image">
