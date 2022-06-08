@@ -12,8 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <title>Home</title>
 </head>
-<body>
-    
+<body> 
     <nav class="navbar navbar-expand-md navbar-light my-color sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand nav-brand-padding fs-2" href="home.php"><strong class="navbar-text-color">WPMS</strong></a>
@@ -71,11 +70,8 @@
             </div>
         </div>
     </div>
-
     <?php include 'footer.php'; ?>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
     <script>
 	document.querySelector('form').onsubmit = function(){
 		if ( document.querySelector('#client-name-id').value.trim().length == 0 ) {
@@ -86,8 +82,6 @@
 
 		return ( !document.querySelectorAll('.is-invalid').length > 0 );
 	}
-
    </script>
-
 </body>
 </html>
