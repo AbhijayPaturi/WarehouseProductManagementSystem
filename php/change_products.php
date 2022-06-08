@@ -5,21 +5,18 @@
         echo $mysqli->error;
         exit();
     }
-
     $sql_clients = "SELECT * FROM clients;";
     $results_clients = $mysqli->query($sql_clients);
     if ( $results_clients == false ) {
         echo $mysqli->error;
         exit();
     }
-
     $sql_products = "SELECT * FROM products;";
     $results_products = $mysqli->query($sql_products);
     if ( $results_products == false ) {
         echo $mysqli->error;
         exit();
     }
-
     $mysqli->close();
 ?>
 <!DOCTYPE html>
@@ -61,7 +58,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container-fluid"> 
         <form action="confirm_shipment.php" method="POST">
             <div class="row row-margins home-fonts">
