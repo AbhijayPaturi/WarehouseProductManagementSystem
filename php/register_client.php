@@ -1,5 +1,4 @@
 <?php
-    // var_dump($_POST);
 	require "../config/config.php";
 	$isInserted = false;
 
@@ -15,45 +14,40 @@
 			exit();
 		}
 
-        $sql_clients = "SELECT * FROM clients;";
-        $results_clients = $mysqli->query($sql_clients);
-        if ( $results_clients == false ) {
-            echo $mysqli->error;
-            exit();
-        }
+	$sql_clients = "SELECT * FROM clients;";
+	$results_clients = $mysqli->query($sql_clients);
+	if ( $results_clients == false ) {
+	    echo $mysqli->error;
+	    exit();
+	}
 
-        // var_dump($results_clients);
-        // $results_clients->data_seek(0);
+	$found = false;
+	while(($row = $results_clients->fetch_assoc()) && $found == false) {
+	    if ($row["client_name"] == $_POST["client_name"]) {
+		$found = true;
+	    }
+	}
 
-        $found = false;
-        while(($row = $results_clients->fetch_assoc()) && $found == false) {
-            if ($row["client_name"] == $_POST["client_name"]) {
-                $found = true;
-            }
-        }
+	if (!$found) {
+	    $statement = $mysqli->prepare("INSERT INTO clients(client_name) VALUES(?);");
+	    $statement->bind_param("s", $_POST["client_name"]); 
+	    $executed = $statement->execute();
+	    if (!$executed) {
+		$error = $mysqli->error;
+	    }
 
-        if (!$found) {
-            // ---- Prepared Statements 
-		    $statement = $mysqli->prepare("INSERT INTO clients(client_name) VALUES(?);");
-            $statement->bind_param("s", $_POST["client_name"]); 
-            $executed = $statement->execute();
-            if (!$executed) {
-                $error = $mysqli->error;
-            }
+	    if($mysqli->affected_rows == 1) {
+		$isInserted = true;
+	    }
+	    else {
+		$error = "There was an error with this add action. Please try again.";
+	    }
 
-            if($mysqli->affected_rows == 1) {
-                $isInserted = true;
-            }
-            else {
-                $error = "There was an error with this add action. Please try again.";
-            }
-        
-        }
-        else {
-            $error = "Are you sure you are NOT a client ALREADY? <br><strong>Please try again!</strong>";
-        }
-                            
-		// Close 
+	}
+	else {
+	    $error = "Are you sure you are NOT a client ALREADY? <br><strong>Please try again!</strong>";
+	}
+
 		$mysqli->close();
 	}
 ?>
@@ -74,7 +68,6 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light my-color sticky-top">
-        <!-- Container that is fluid -->
         <div class="container-fluid">
             <a class="navbar-brand nav-brand-padding fs-2" href="home.php"><strong class="navbar-text-color">WPMS</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,6 +135,5 @@
     <?php include 'footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
 </body>
 </html>
