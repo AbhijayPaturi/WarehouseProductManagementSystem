@@ -81,29 +81,26 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <script>
-		document.querySelector('form').onsubmit = function(){
-			if ( document.querySelector('#quantity-shipped-id').value.trim().length == 0 ) {
-				document.querySelector('#quantity-shipped-id').classList.add('is-invalid');
-			} else {
-				document.querySelector('#quantity-shipped-id').classList.remove('is-invalid');
-			}
-
-            if ( document.querySelector('#product-selected').value.trim().length == 0 ) {
-				document.querySelector('#product-selected').classList.add('is-invalid');
-			} else {
-				document.querySelector('#product-selected').classList.remove('is-invalid');
-			}
-
-            if ( document.querySelector('#client-name-id').value.trim().length == 0 ) {
-				document.querySelector('#client-name-id').classList.add('is-invalid');
-			} else {
-				document.querySelector('#client-name-id').classList.remove('is-invalid');
-			}
-
-			return ( !document.querySelectorAll('.is-invalid').length > 0 );
+	document.querySelector('form').onsubmit = function(){
+		if ( document.querySelector('#quantity-shipped-id').value.trim().length == 0 ) {
+			document.querySelector('#quantity-shipped-id').classList.add('is-invalid');
+		} else {
+			document.querySelector('#quantity-shipped-id').classList.remove('is-invalid');
 		}
+		if ( document.querySelector('#product-selected').value.trim().length == 0 ) {
+			document.querySelector('#product-selected').classList.add('is-invalid');
+		} else {
+			document.querySelector('#product-selected').classList.remove('is-invalid');
+		}
+		if ( document.querySelector('#client-name-id').value.trim().length == 0 ) {
+			document.querySelector('#client-name-id').classList.add('is-invalid');
+		} else {
+			document.querySelector('#client-name-id').classList.remove('is-invalid');
+		}
+		return ( !document.querySelectorAll('.is-invalid').length > 0 );
+	}
 
-	</script>
+</script>
 
 </body>
 </html>
