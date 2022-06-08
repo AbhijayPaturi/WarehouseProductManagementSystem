@@ -1,0 +1,155 @@
+.background-stuff { 
+    background-image: url("pictures/client.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* opacity: 30%; */
+    height: 300px;
+    position: relative;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.select-client-text {
+    color: #FAF9F6;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.client-text { 
+    color: #0D0A0B;
+    font-size: 40px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.row-margins {
+    padding-top: 35px;
+    padding-bottom: 35px;
+    box-sizing: border-box;
+}
+
+.client-form-text {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 40px;
+}
+
+.form-bg-color {
+    background-color: #F57C73;
+}
+
+.submit-button-colors {
+    background-color: #531DFB;
+    color: #FAF9F6;
+    opacity: 50%;
+    margin-top: 1%;
+}
+
+.submit-button-colors:hover {
+    background-color: #F57C73;
+    color: #0D0A0B;
+    opacity: 100%;
+}
+
+.form-rounded {
+    border-radius: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.overlay-image {
+    background-color: #0D0A0B;
+    height: 300px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    opacity: 100%;
+}
+
+.select-client-button-colors {
+    background-color: #FAF9F6;
+    
+    color: #0D0A0B;
+}
+
+/* Syling the Footer */
+.footer-format {
+    border-top: 2px solid lightgrey;
+    padding: 10px;
+}
+
+.home-fonts {
+    font-family: "Nunito", sans-serif;
+}
+
+.register-row-text-center {
+    text-align: center;
+    position: relative;
+}
+
+.register-row-text-center h1 {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.is-required-spacing {
+    margin-top: 0.1%;
+    margin-bottom: 0.1%;
+}
+
+.client-input-form-width {
+    width: 300px;
+}
+
+.about-title {
+    font-size: 30px;
+    margin-top: 2%;
+}
+
+.about-info {
+    border-top: 1px solid #531DFB;
+    font-size: 20px;
+    margin-bottom: 2%;
+}
+
+
+/* The following CSS rules are added only when screen size is 768px and above */
+@media(min-width: 768px) {
+    .client-input-form-width {
+        width: 400px;
+    }
+
+}
+
+/* The following CSS rules are added only when screen size is 992px and above */
+@media(min-width: 992px) {
+
+    .background-stuff { 
+        background-image: url("pictures/client.png");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* opacity: 30%; */
+        height: 300px;
+        position: relative;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    .client-input-form-width {
+        width: 450px;
+    }
+
+}
+
