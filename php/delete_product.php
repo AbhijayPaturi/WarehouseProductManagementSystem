@@ -1,7 +1,6 @@
 <?php 
     require "../config/config.php";
 
-    
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     if ( $mysqli->errno ) {
         echo $mysqli->error;
@@ -15,7 +14,6 @@
         exit();
     }
 
-    // Create an array of unqiue warehouse aisles
     $warehouse_aisles_array = array();
     while ( $row = $results_products->fetch_assoc() ) {
         if ( !(in_array($row["warehouse_section"], $warehouse_aisles_array)) ) {
@@ -45,26 +43,8 @@
         exit();
     }
 
-
-    // var_dump($results_categories);
-    // var_dump($results_products);
-    // while ($row = $results_products->fetch_assoc()) {
-    //     echo "<hr>";
-    //     var_dump($row);
-    // }
-    // var_dump($results_products->fetch_assoc());
-    // $row = $results_products->fetch_assoc();
-    // var_dump($row);
-    // echo "<hr>";
-    // var_dump($row["warehouse_section"]);
-
-                        
-    // Close 
     $mysqli->close();
 
-
-    // $error = "hi";
-    // $isAdded = true;
     $i = 0;
     $j = 0;
 
@@ -87,7 +67,6 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light my-color sticky-top">
-        <!-- Container that is fluid -->
         <div class="container-fluid">
             <a class="navbar-brand nav-brand-padding fs-2" href="home.php"><strong class="navbar-text-color">WPMS</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,9 +93,7 @@
 
     <div class="container-fluid main-div">
         <form id="form-id" action="" method="">
-        <!-- Row 1 -->
         <div class="row">
-            
             <div class="col-12 col-md-9">
                 <div class="row">
                     <div class="col-12 search-padding">
@@ -132,8 +109,6 @@
                     </div>
             </div>
         </div>
-
-        <!-- Row 2 -->
         <div class="row">
         <div id="row-2-column" class="col-0 col-md-3 options-border">
                 <button type="button" class="btn btn-color w-100 form-control-lg filter-buttton-spacing">Filters</button>
@@ -141,8 +116,7 @@
                     <p class="option-header maufacturers-spacing">Manufacturers</p>
                     <select id="product-manufacturer-id" name="product_manufacturer_id" class="form-select dropdown-spacing" aria-label="Default select example">
                             <option selected value="0">All</option>
-                            <?php while( $row = $results_manufac->fetch_assoc() ): ?>
-                                
+                            <?php while( $row = $results_manufac->fetch_assoc() ): ?>                                
                                 <option value="<?php echo $row['id']; ?>">
                                     <?php echo $row['manufacturer'];?>
                                 </option>
@@ -150,8 +124,7 @@
                     </select>
                 </div>
                 <div id="category-selection">
-                    <p class="option-header">Categories</p>
-                    
+                    <p class="option-header">Categories</p>                    
                     <select id="product-category-id" name="product_category_id" class="form-select dropdown-spacing" aria-label="Default select example">
                             <option selected value="0">All</option>
                             <?php while( $row = $results_categories->fetch_assoc() ): ?>
@@ -160,8 +133,7 @@
                                     <?php echo $row['category'];?>
                                 </option>
                             <?php endwhile; ?>
-                    </select>
-                    
+                    </select>                   
                 </div>
                 <div id="warehouse-selection">
                     <p class="option-header">Warehouse Aisle</p>
@@ -173,12 +145,10 @@
                                     <?php echo $warehouse_aisle;?>
                                 </option>
                             <?php endforeach; ?>
-                    </select>
-                    
+                    </select>                   
                 </div>
                 <div id="condition-selection">
                     <p class="option-header">Condition</p>
-
                     <select id="product-condition-id" name="product_condition_id" class="form-select dropdown-spacing" aria-label="Default select example">
                             <option selected value="0">All</option>
                             <?php while( $row = $results_conditions->fetch_assoc() ): ?>
@@ -189,23 +159,19 @@
                             <?php endwhile; ?>
                     </select>
 
-                </div>
-                
+                </div>       
             </div>
             <?php $results_products->data_seek(0); ?>
             <!-- Product Information -->
             <div class="col-12 col-md-9 prod-rows-border js-ajax">
-                <!-- Sub-Row -->
                 <?php while( ($row = $results_products->fetch_assoc()) ):?>	
                     <div class="row">
                         <div class="col-12 col-md-3">
                             <div class="img-div">
-                                <!-- Product Pic -->
                                 <img src="../pictures/no_pic_image.png" alt="Product Image">
                             </div>
                         </div>   
                         <div class="col-12 col-md-9 prod-rows-center">
-                            <!-- Sub-Sub-Row -->
                             <div class="row">
                                 <div class="col-12 prod-details-styling">
                                     <span class="prod-name-unique"><strong><?php echo $row["name"]; ?></strong></span>
@@ -268,94 +234,78 @@
             });
         });
 
-        // Function declaration for ajax GET requests
-		function ajaxGet(endpointUrl, returnFunction){
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', endpointUrl, true);
-			xhr.onreadystatechange = function(){
-				if (xhr.readyState == XMLHttpRequest.DONE) {
-					if (xhr.status == 200) {
-						// When ajax call is complete, call this function, pass a string with the response
-						returnFunction( xhr.responseText );
-					} else {
-						alert('AJAX Error.');
-						console.log(xhr.status);
-					}
+	function ajaxGet(endpointUrl, returnFunction){
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', endpointUrl, true);
+		xhr.onreadystatechange = function(){
+			if (xhr.readyState == XMLHttpRequest.DONE) {
+				if (xhr.status == 200) {
+					// When ajax call is complete, call this function, pass a string with the response
+					returnFunction( xhr.responseText );
+				} else {
+					alert('AJAX Error.');
+					console.log(xhr.status);
 				}
 			}
-			xhr.send();
-		};
+		}
+		xhr.send();
+	};
 
         document.querySelector("#form-id").onsubmit = function() { 
-			// prevent the form from actually being submitted 
-			event.preventDefault();
+		event.preventDefault();
+		let searchInput = document.querySelector("#product-name").value.trim();
+        	console.log(searchInput);
+		let manufacturerInfo = document.querySelector("#product-manufacturer-id").value;
+                let categoriesInfo = document.querySelector("#product-category-id").value;
+	        let warehouseAisle = document.querySelector("#warehouse_aisle_id").value;
+	        console.log(warehouseAisle);
+	        let conditionInfo = document.querySelector("#product-condition-id").value;
 
-			// Get the all of the user's search/filter terms 
-			let searchInput = document.querySelector("#product-name").value.trim();
-            console.log(searchInput);
-            let manufacturerInfo = document.querySelector("#product-manufacturer-id").value;
-            let categoriesInfo = document.querySelector("#product-category-id").value;
-            let warehouseAisle = document.querySelector("#warehouse_aisle_id").value;
-            console.log(warehouseAisle);
-            let conditionInfo = document.querySelector("#product-condition-id").value;
-
-			// Call the ajax function, pass in the search input, log out results 
-			ajaxGet("view_product_backend.php?prodName=" + searchInput + "&manufacturerId=" + manufacturerInfo + "&categoryId=" + categoriesInfo + "&warehouseAisle=" + warehouseAisle + "&conditionId=" + conditionInfo, function(results) {
-				console.log("view_product_backend.php?prodName=" + searchInput + "&manufacturerId=" + manufacturerInfo + "&categoryId=" + categoriesInfo + "&warehouseAisle=" + warehouseAisle + "&conditionId=" + conditionInfo);
-
-				// convert the data into js object 
-				let jsResults = JSON.parse(results);
-				console.log(jsResults);
-                // console.log(jsResults.length);
-
-				let resultsList = document.querySelector(".js-ajax");
-                // console.log(jsResults[0].warehouse_section);
-
-				// Clear the previous list of results 
-				resultsList.replaceChildren();
-
-				// Run through the list of results and dynamically create a <li> tag for each of the reuslts 
-				for (let i = 0; i < jsResults.length; i++) {
-					let htmlString = `
-
-                    <!-- Sub-Row -->
-                        <div class="row">
-                            <div class="col-12 col-md-3">
-                                <div class="img-div">
-                                    <!-- Product Pic -->
-                                    <img src="../pictures/general_prod_image.jpeg" alt="Product Image">
-                                </div>
-                            </div>   
-                            <div class="col-12 col-md-9 prod-rows-center">
-                                <!-- Sub-Sub-Row -->
-                                <div class="row">
-                                    <div class="col-12 prod-details-styling">
-                                        <a class="product-name-styling" href="product_details.php?products_id=${jsResults[i].id}&product_name=${jsResults[i].name}>"><strong>${jsResults[i].name}</strong></a>
-                                    </div>    
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 col-md-6 prod-details-styling">
-                                        Warehouse Aisle: <strong>${jsResults[i].warehouse_section}</strong>
-                                    </div>   
-                                    <div class="col-12 col-md-6 prod-details-styling">
-                                        Quantity: <strong>${jsResults[i].quantity}</strong>
-                                    </div>      
-                                </div>
-                                <div class="row last-prod-row-styling">
-                                <div class="col-12 prod-details-styling">
-                                    <input type="hidden" name="products_id" value="${jsResults[i].products_id}"> 
-                                    <input type="hidden" name="product_name" value="${jsResults[i].name}"> 
-                                    <a type="button" onclick="return confirm('You are about to DELETE the product ${jsResults[i].name}. Press OK if this was your intended action.');" class="btn btn-color delete-button-style form-control-lg">Delete</a>
-                                </div>     
-                            </div>
-                            </div>      
-                        </div>
-                    `;
-					// Append to the formatted output 
-					resultsList.innerHTML += htmlString;
-				}
-			});
-		}
+		// Call the ajax function, pass in the search input, log out results 
+		ajaxGet("view_product_backend.php?prodName=" + searchInput + "&manufacturerId=" + manufacturerInfo + "&categoryId=" + categoriesInfo + "&warehouseAisle=" + warehouseAisle + "&conditionId=" + conditionInfo, function(results) {
+			console.log("view_product_backend.php?prodName=" + searchInput + "&manufacturerId=" + manufacturerInfo + "&categoryId=" + categoriesInfo + "&warehouseAisle=" + warehouseAisle + "&conditionId=" + conditionInfo);
+			let jsResults = JSON.parse(results);
+			console.log(jsResults);
+			let resultsList = document.querySelector(".js-ajax");
+			resultsList.replaceChildren();
+			for (let i = 0; i < jsResults.length; i++) {
+				let htmlString = `                
+					<div class="row">
+					    <div class="col-12 col-md-3">
+						<div class="img-div">
+						    <img src="../pictures/general_prod_image.jpeg" alt="Product Image">
+						</div>
+					    </div>   
+					    <div class="col-12 col-md-9 prod-rows-center">
+						<!-- Sub-Sub-Row -->
+						<div class="row">
+						    <div class="col-12 prod-details-styling">
+							<a class="product-name-styling" href="product_details.php?products_id=${jsResults[i].id}&product_name=${jsResults[i].name}>"><strong>${jsResults[i].name}</strong></a>
+						    </div>    
+						</div>
+						<div class="row">
+						    <div class="col-12 col-md-6 prod-details-styling">
+							Warehouse Aisle: <strong>${jsResults[i].warehouse_section}</strong>
+						    </div>   
+						    <div class="col-12 col-md-6 prod-details-styling">
+							Quantity: <strong>${jsResults[i].quantity}</strong>
+						    </div>      
+						</div>
+						<div class="row last-prod-row-styling">
+						<div class="col-12 prod-details-styling">
+						    <input type="hidden" name="products_id" value="${jsResults[i].products_id}"> 
+						    <input type="hidden" name="product_name" value="${jsResults[i].name}"> 
+						    <a type="button" onclick="return confirm('You are about to DELETE the product ${jsResults[i].name}. Press OK if this was your intended action.');" class="btn btn-color delete-button-style form-control-lg">Delete</a>
+						</div>     
+					    </div>
+					    </div>      
+					</div>
+				    `;
+					
+				resultsList.innerHTML += htmlString;
+			}
+		});
+	   }
 
     </script>
 </body>
