@@ -29,11 +29,9 @@
 	    $prod_db_quantity = $row["quantity"];
 	}
 	$statement_num_product->close();
-
 	$statement_client_name = $mysqli->prepare("SELECT client_name FROM clients WHERE id = ?;");
 	$statement_client_name->bind_param("i", $_POST["client_name"]);
 	$statement_client_name->execute();
-
 	$results_client_name=$statement_client_name->get_result();
 	$client_db_name = null;
 	if ($results_client_name->num_rows == 1) {
@@ -59,7 +57,6 @@
 		$statement_check_many = $mysqli->prepare("SELECT * FROM products_has_clients WHERE products_id = ? AND clients_id = ?;");
 		$statement_check_many->bind_param("ii", $_POST["product_name"], $_POST["client_name"]);
 		$statement_check_many->execute();
-
 		$results_check_many=$statement_check_many->get_result();
 		if ($results_check_many->num_rows == 0) {
 		    $statement = $mysqli->prepare("INSERT INTO products_has_clients(products_id, clients_id) VALUES(?, ?);");
@@ -87,7 +84,6 @@
 	    $mysqli->close();
       }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,7 +123,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container-fluid">
         <form action="make_shipment.php" method="POST">
             <div class="row">
@@ -166,4 +161,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
-
