@@ -1,7 +1,6 @@
 <?php
 	require "../config/config.php";
 	$isInserted = false;
-
 	if ( !isset($_POST['client_name']) || 
 	empty($_POST['client_name']) || 
 	!isset($_POST['product_name']) || 
@@ -42,7 +41,6 @@
 	    $client_db_name = $row["client_name"];
 	}
 	$statement_client_name->close();
-
 	if ($prod_db_quantity != null) {
 	    if ($_POST["quantity_shipped"] <= $prod_db_quantity) {
 		$statement = $mysqli->prepare("UPDATE products SET quantity = quantity - ? WHERE id = ?;");
@@ -51,7 +49,6 @@
 		if (!$executed) {
 		    $error = $mysqli->error;
 		}
-
 		if($mysqli->affected_rows == 1) {
 		    $isUpdated = true;
 		}
@@ -59,7 +56,6 @@
 		    $error = "There was an error with this update action. Please try again.";
 		}
 		$statement->close();
-
 		$statement_check_many = $mysqli->prepare("SELECT * FROM products_has_clients WHERE products_id = ? AND clients_id = ?;");
 		$statement_check_many->bind_param("ii", $_POST["product_name"], $_POST["client_name"]);
 		$statement_check_many->execute();
@@ -72,7 +68,6 @@
 		    if (!$executed) {
 			$error = $mysqli->error;
 		    }
-
 		    if($mysqli->affected_rows == 1) {
 			$isUpdated = true;
 		    }
@@ -81,7 +76,6 @@
 		    }
 		}
 		$statement_check_many->close();
-
 	    }
 	    else {
 		$error = "Sorry! We do not have enough <em>" . $prod_db_name . "</em>in the warehouse right now!";
@@ -90,9 +84,8 @@
 	else {
 	    $error = "Sorry! Not a valid product quantity entered. Please try again!";
 	}
-
 	    $mysqli->close();
-	}
+      }
 ?>
 
 <!DOCTYPE html>
@@ -148,21 +141,17 @@
                                     <img src="../pictures/success_picture.jpeg" alt="Success Image">
                             </div>
                         <?php endif; ?>
-
                         <div class="client-name-spacing">
                             <?php if ( isset($error) && !empty($error) ) : ?>
                                 <div class="text-danger font-italic">
                                     <div id="msg">The <span class="font-italic italics-msg"><?php echo $prod_db_name;?></span> Has NOT Been Successfully Shipped To <span class="font-italic italics-msg"><?php echo $client_db_name;?></span>.<br>Press Back and Try Again!</div>
                                  </div>
-                            <?php endif; ?>
-                        
+                            <?php endif; ?>                       
                             <?php if ($isUpdated) : ?>
-                                <div class="text-success error-message">
-                                    
+                                <div class="text-success error-message">                                
                                     <div>The <span class="font-italic italics-msg"><?php echo $prod_db_name;?></span> Has Been Successfully Shipped To <span class="font-italic italics-msg"><?php echo $client_db_name;?></span>!</div>
                                 </div>
                             <?php endif; ?>
-
                             <?php if ( isset($error) && !empty($error) ) : ?>
                                 <button type="submit" class="btn btn-primary submit-button-colors button-rounded-error home-fonts">Back</button>
                             <?php else : ?>
@@ -173,11 +162,8 @@
             </div> 
         </form>
     </div>
-
-    <?php include 'footer.php'; ?>
-    
+    <?php include 'footer.php'; ?>   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
 </body>
 </html>
 
