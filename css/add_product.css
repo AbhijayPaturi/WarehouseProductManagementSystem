@@ -1,5 +1,4 @@
 .row-margins {
-    /* border-top: 3px solid #0D0A0B; */
     padding-top: 35px;
     padding-bottom: 35px;
     box-sizing: border-box;
@@ -62,8 +61,6 @@
     margin-top: 1%;
 }
 
-
-/* The following CSS rules are added only when screen size is 768px and above */
 @media(min-width: 768px) {
     .client-input-form-width {
         width: 400px;
@@ -76,10 +73,8 @@
     .shipped-form-text {
         font-size: 30px;
     }
-
 }
 
-/* The following CSS rules are added only when screen size is 992px and above */
 @media(min-width: 992px) {
     .client-input-form-width {
         width: 450px;
@@ -92,6 +87,5 @@
     .shipped-form-text {
         font-size: 35px;
     }
-
 }
 
