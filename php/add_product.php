@@ -5,28 +5,24 @@
         echo $mysqli->error;
         exit();
     }
-
     $sql_conditions = "SELECT * FROM conditions;";
     $results_conditions = $mysqli->query($sql_conditions);
     if ( $results_conditions == false ) {
         echo $mysqli->error;
         exit();
     }
-
     $sql_categories = "SELECT * FROM categories;";
     $results_categories = $mysqli->query($sql_categories);
     if ( $results_categories == false ) {
         echo $mysqli->error;
         exit();
     }
-
     $sql_manufacturers = "SELECT * FROM manufacturers;";
     $results_manufacturers = $mysqli->query($sql_manufacturers);
     if ( $results_manufacturers == false ) {
         echo $mysqli->error;
         exit();
     }
-
     $mysqli->close();
 ?>
 <!DOCTYPE html>
@@ -68,7 +64,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container-fluid"> 
         <form action="add_product_confirmation.php" method="POST">
             <div class="row row-margins">
@@ -143,9 +138,7 @@
             </div> 
         </form>
     </div>
-
     <?php include 'footer.php'; ?>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
     <script>
 	document.querySelector('form').onsubmit = function(){
@@ -198,6 +191,5 @@
 	   }
 
 	</script>
-
 </body>
 </html>
