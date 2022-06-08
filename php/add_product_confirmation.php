@@ -27,21 +27,18 @@
 			echo $mysqli->error;
 			exit();
 	}
-
 	$sql_check = "SELECT * FROM products WHERE name LIKE '" . $_POST['product_name'] . "' AND price=" . $_POST['product_price'] ." AND model LIKE '" . $_POST['product_model'] . "' AND categories_id=" . $_POST['product_category_id'] . " AND manufacturers_id=" . $_POST['product_manufacturer_id'] . " AND conditions_id=" . $_POST['product_condition_id'] . ";";
 	$results_check = $mysqli->query($sql_check);
 	if ( $results_check == false ) {
 	    echo $mysqli->error;
 	    exit();
 	}
-
 	if ($results_check->fetch_assoc() == null) {
 	    if ( isset($_POST['product_features']) && !empty($_POST['product_features']) ) {
 		$product_features = $_POST['product_features'];
 	    } else {
 		$product_features = NULL;
 	    }
-
 	    $statement = $mysqli->prepare("INSERT INTO products(name, quantity, warehouse_section, price, model, features, categories_id, manufacturers_id, conditions_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);");
 	    $statement->bind_param("sisdssiii", $_POST["product_name"], $_POST["product_quantity"], $_POST["warehouse_aisle"], $_POST["product_price"], $_POST["product_model"], $product_features, $_POST["product_category_id"], $_POST["product_manufacturer_id"], $_POST["product_condition_id"]); 
 	    $executed = $statement->execute();
@@ -63,7 +60,6 @@
 		$mysqli->close();
       }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,7 +99,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container-fluid">
             <div class="row">
                 <div class="col col-12 register-row-text-center">
@@ -146,4 +141,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
-
