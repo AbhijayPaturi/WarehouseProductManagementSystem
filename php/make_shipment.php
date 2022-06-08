@@ -20,8 +20,6 @@
         echo $mysqli->error;
         exit();
     }
-
-    // Close 
     $mysqli->close();
 ?>
 <!DOCTYPE html>
@@ -40,7 +38,6 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light my-color sticky-top">
-        <!-- Container that is fluid -->
         <div class="container-fluid">
             <a class="navbar-brand nav-brand-padding fs-2" href="home.php"><strong class="navbar-text-color">WPMS</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,10 +100,6 @@
                     <div class="is-required-spacing"><span class="text-danger font-italic">* Required</span></div>
                     <button type="submit" class="btn btn-primary submit-button-colors home-fonts">Ship</button>
                 </div>
-
-                <!-- <div class="col col-6 register-row-text-center">
-                        <h1 class="home-fonts client-text"><a href="register_client.php" class="register-client-text">REGISTER A CLIENT</a></h1>
-                </div> -->
             </div> 
         </form>
     </div>
@@ -116,29 +109,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <script>
-        // JS as first-level check
-		document.querySelector('form').onsubmit = function(){
-			if ( document.querySelector('#quantity-shipped-id').value.trim().length == 0 ) {
-				document.querySelector('#quantity-shipped-id').classList.add('is-invalid');
-			} else {
-				document.querySelector('#quantity-shipped-id').classList.remove('is-invalid');
-			}
-
-            if ( document.querySelector('#product-selected').value.trim().length == 0 ) {
-				document.querySelector('#product-selected').classList.add('is-invalid');
-			} else {
-				document.querySelector('#product-selected').classList.remove('is-invalid');
-			}
-
-            if ( document.querySelector('#client-name-id').value.trim().length == 0 ) {
-				document.querySelector('#client-name-id').classList.add('is-invalid');
-			} else {
-				document.querySelector('#client-name-id').classList.remove('is-invalid');
-			}
-
-			return ( !document.querySelectorAll('.is-invalid').length > 0 );
+	document.querySelector('form').onsubmit = function(){
+		if ( document.querySelector('#quantity-shipped-id').value.trim().length == 0 ) {
+			document.querySelector('#quantity-shipped-id').classList.add('is-invalid');
+		} else {
+			document.querySelector('#quantity-shipped-id').classList.remove('is-invalid');
 		}
 
+		if ( document.querySelector('#product-selected').value.trim().length == 0 ) {
+			document.querySelector('#product-selected').classList.add('is-invalid');
+		} else {
+			document.querySelector('#product-selected').classList.remove('is-invalid');
+		}
+
+		if ( document.querySelector('#client-name-id').value.trim().length == 0 ) {
+			document.querySelector('#client-name-id').classList.add('is-invalid');
+		} else {
+			document.querySelector('#client-name-id').classList.remove('is-invalid');
+		}
+
+		return ( !document.querySelectorAll('.is-invalid').length > 0 );
+	}
 	</script>
 
 </body>
