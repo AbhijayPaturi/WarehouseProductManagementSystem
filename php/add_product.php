@@ -1,6 +1,5 @@
 <?php 
-    require "../config/config.php";
-    
+    require "../config/config.php";   
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     if ( $mysqli->errno ) {
         echo $mysqli->error;
