@@ -1,6 +1,5 @@
 <?php  
-    require "../config/config.php";
-    
+    require "../config/config.php";   
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     if ( $mysqli->errno ) {
         echo $mysqli->error;
@@ -13,7 +12,6 @@
         echo $mysqli->error;
         exit();
     }
-
     $sql_products = "SELECT * FROM products;";
     $results_products = $mysqli->query($sql_products);
     if ( $results_products == false ) {
@@ -61,14 +59,12 @@
             </div>
         </div>
     </nav>
-
     <div class="container-fluid"> 
         <form action="confirm_shipment.php" method="POST">
             <div class="row row-margins">
                 <div class="col col-12 register-row-text-center">
                     <div class="mb-3">
                     <label class="form-label fs-3"><span class="shipped-form-text align-middle home-fonts">SELECT THE</span><br><span class="shipped-form-text align-middle home-fonts">CLIENT'S NAME</span><span class="text-danger">*</span></label>
-                                <!-- <input type="text" id="client-name-id" name="client_name" class="form-control form-control-lg form-bg-color form-rounded client-input-form-width register-row-text-center" id="exampleFormControlInput1" placeholder="Client Name"> -->
                                 <select id="client-name-id" name="client_name" class="form-select client-input-form-width" aria-label="Default select example">
                                 <option selected disabled>-- Select ONE --</option>
                                     <?php while( $row = $results_clients->fetch_assoc() ): ?>
@@ -80,17 +76,14 @@
                                 </select>
                     </div>
                     <div class="mb-3">
-                    <label class="form-label fs-3"><span class="shipped-form-text align-middle home-fonts">SELECT THE</span><br><span class="shipped-form-text align-middle home-fonts">PRODUCT</span><span class="text-danger">*</span></label>
-                                <!-- <input type="text" id="client-name-id" name="client_name" class="form-control form-control-lg form-bg-color form-rounded client-input-form-width register-row-text-center" id="exampleFormControlInput1" placeholder="Client Name"> -->
+                    <label class="form-label fs-3"><span class="shipped-form-text align-middle home-fonts">SELECT THE</span><br><span class="shipped-form-text align-middle home-fonts">PRODUCT</span><span class="text-danger">*</span></label>                              
                                 <select id="product-selected" name="product_name" class="form-select client-input-form-width" aria-label="Default select example">
                                 <option selected disabled>-- Select ONE --</option>
-
                                     <?php while( $row = $results_products->fetch_assoc() ): ?>
                                         <option value="<?php echo $row['id']; ?>">
                                             <?php echo $row['name'];?>
                                         </option>
-                                    <?php endwhile; ?>
-                                    
+                                    <?php endwhile; ?>                                   
                                 </select>
                     </div>
                     <div class="mb-3">
@@ -103,11 +96,8 @@
             </div> 
         </form>
     </div>
-
     <?php include 'footer.php'; ?>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
     <script>
 	document.querySelector('form').onsubmit = function(){
 		if ( document.querySelector('#quantity-shipped-id').value.trim().length == 0 ) {
@@ -127,10 +117,8 @@
 		} else {
 			document.querySelector('#client-name-id').classList.remove('is-invalid');
 		}
-
 		return ( !document.querySelectorAll('.is-invalid').length > 0 );
 	}
-	</script>
-
+    </script>
 </body>
 </html>
