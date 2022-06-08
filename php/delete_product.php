@@ -247,8 +247,6 @@
 	        let warehouseAisle = document.querySelector("#warehouse_aisle_id").value;
 	        console.log(warehouseAisle);
 	        let conditionInfo = document.querySelector("#product-condition-id").value;
-
-		// Call the ajax function, pass in the search input, log out results 
 		ajaxGet("view_product_backend.php?prodName=" + searchInput + "&manufacturerId=" + manufacturerInfo + "&categoryId=" + categoriesInfo + "&warehouseAisle=" + warehouseAisle + "&conditionId=" + conditionInfo, function(results) {
 			console.log("view_product_backend.php?prodName=" + searchInput + "&manufacturerId=" + manufacturerInfo + "&categoryId=" + categoriesInfo + "&warehouseAisle=" + warehouseAisle + "&conditionId=" + conditionInfo);
 			let jsResults = JSON.parse(results);
