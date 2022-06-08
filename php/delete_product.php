@@ -303,8 +303,7 @@
 				    `;
 					
 				resultsList.innerHTML += htmlString;
-			}
-		});
+			}});
 	   }
 
     </script>
