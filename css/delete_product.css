@@ -7,11 +7,8 @@
     text-decoration: none;
 }
 
-
-/* The following CSS rules are added only when screen size is 768px and above */
 @media(min-width: 768px) {
     .delete-button-style {
         width: 100%;
     }
-
 }
