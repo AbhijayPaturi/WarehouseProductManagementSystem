@@ -1,4 +1,3 @@
-/* Syling the Footer */
 .footer-format {
     border-top: 2px solid lightgrey;
     padding: 10px;
@@ -32,8 +31,6 @@
     padding-bottom: 12.5%;
     font-size: 40px;
     border-top: 2px solid #FAF9F6;
-    /* #F57C73 */
-    /* #531DFB */
 }
 
 .text-styling {
@@ -48,16 +45,12 @@
 
 .add-style:hover {
     font-weight: bold;
-    /* background-color: #F57C73; */
 }
 
 .delete-style:hover {
     font-weight: bold;
-    /* background-color: #F57C73; */
 }
 
-
-/* The following CSS rules are added only when screen size is 768px and above */
 @media(min-width: 768px) {
     
     .add-style {
@@ -85,7 +78,6 @@
     }
 }
 
-/* The following CSS rules are added only when screen size is 992px and above */
 @media(min-width: 992px) {
 
     .add-style {
