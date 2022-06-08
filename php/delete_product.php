@@ -43,7 +43,6 @@
     $i = 0;
     $j = 0;
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,7 +83,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container-fluid main-div">
         <form id="form-id" action="" method="">
         <div class="row">
