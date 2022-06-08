@@ -1,5 +1,4 @@
 <?php 
-
     if( !isset($_GET["products_id"]) || empty($_GET["products_id"]) ) {
         $error = "Invalid Product Selected!";
     }
@@ -9,10 +8,8 @@
         if ($mysqli->connect_errno) {
             echo $mysqli->connect_error;
             exit();
-        }
-    
-        $mysqli->set_charset("utf-8");
-    
+        }  
+        $mysqli->set_charset("utf-8");    
         $sql = "SELECT *
         FROM products
         LEFT JOIN categories 
@@ -26,15 +23,12 @@
         LEFT JOIN clients 
             ON products_has_clients.clients_id = clients.id         
         WHERE products.id=" . $_GET["products_id"] . ";";
-
-
         $results = $mysqli->query($sql);
         if (!$results) {
             echo $mysqli->error;
             exit();
         }
-    }
-    
+    }    
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +69,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container main-div">
         <div class="row">
             <div class="col-12 col-md-6">
@@ -139,13 +132,9 @@
             </div>
         </div>
     </div>
-
     <?php include 'footer.php'; ?>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
     <script>
         let productName = "<?php echo $_GET["product_name"]; ?>";
         console.log(productName);
