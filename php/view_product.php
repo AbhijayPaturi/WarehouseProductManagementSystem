@@ -1,6 +1,5 @@
 <?php 
     require "../config/config.php";
-
     if ( !isset($_POST['product_name']) || 
     	empty($_POST['product_name']) || 
     !isset($_POST['warehouse_aisle_id']) || 
@@ -18,13 +17,11 @@
 		exit();
 	}
         $sql_products = "SELECT products.id AS products_id, name, quantity, warehouse_section, price, conditions.condition FROM products LEFT JOIN conditions ON products.conditions_id = conditions.id;";
-
         $results_products = $mysqli->query($sql_products);
         if ( $results_products == false ) {
             echo $mysqli->error;
             exit();
-        }
-	    
+        }    
         $warehouse_aisles_array = array();
         while ( $row = $results_products->fetch_assoc() ) {
             if ( !(in_array($row["warehouse_section"], $warehouse_aisles_array)) ) {
@@ -32,31 +29,25 @@
             }
         }
         $results_products->data_seek(0); 
-
-
         $sql_conditions = "SELECT * FROM conditions;";
         $results_conditions = $mysqli->query($sql_conditions);
         if ( $results_conditions == false ) {
             echo $mysqli->error;
             exit();
         }
-    
         $sql_manufac = "SELECT * FROM manufacturers;";
         $results_manufac = $mysqli->query($sql_manufac);
         if ( $results_manufac == false ) {
             echo $mysqli->error;
             exit();
         }
-    
         $sql_categories = "SELECT * FROM categories;";
         $results_categories = $mysqli->query($sql_categories);
         if ( $results_categories == false ) {
             echo $mysqli->error;
             exit();
         }
-
-        $mysqli->close();
-        
+        $mysqli->close();  
 	}
 	else {
 		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -64,15 +55,12 @@
 			echo $mysqli->error;
 			exit();
 		}
-
         $sql_products = "SELECT products.id AS products_id, name, quantity, warehouse_section, price, conditions.condition FROM products LEFT JOIN conditions ON products.conditions_id = conditions.id;";
-
         $results_products = $mysqli->query($sql_products);
         if ( $results_products == false ) {
             echo $mysqli->error;
             exit();
-        }
-        
+        }    
         $warehouse_aisles_array = array();
         while ( $row = $results_products->fetch_assoc() ) {
             if ( !(in_array($row["warehouse_section"], $warehouse_aisles_array)) ) {
@@ -80,38 +68,32 @@
             }
         }
         $results_products->data_seek(0); 
-
         $sql_conditions = "SELECT * FROM conditions;";
         $results_conditions = $mysqli->query($sql_conditions);
         if ( $results_conditions == false ) {
             echo $mysqli->error;
             exit();
         }
-    
         $sql_manufac = "SELECT * FROM manufacturers;";
         $results_manufac = $mysqli->query($sql_manufac);
         if ( $results_manufac == false ) {
             echo $mysqli->error;
             exit();
         }
-    
         $sql_categories = "SELECT * FROM categories;";
         $results_categories = $mysqli->query($sql_categories);
         if ( $results_categories == false ) {
             echo $mysqli->error;
             exit();
         }
-
 	if ( isset($_POST['product_name']) && !empty($_POST['product_name']) ) {
 		$product_name = $_POST['product_name'];
 	} else {
 		$product_name = NULL;
 	}
-
         $statement = $mysqli->prepare("SELECT products.id AS products_id, name, quantity, warehouse_section, price, conditions.condition FROM products LEFT JOIN conditions ON products.conditions_id = conditions.id WHERE name LIKE '%?%';");
         $statement->bind_param("s", $product_name); 
         $statement->execute();
-
         $results_products=$statement->get_result();
         $statement->close();
 	$mysqli->close();
@@ -119,7 +101,6 @@
         $j = 0;
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,7 +141,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container-fluid main-div">
         <form action="" method="" id="form-id">
         <div class="row">        
@@ -178,8 +158,7 @@
                         </div>      
                     </div>
             </div>
-        </div>
-		
+        </div>		
         <div class="row">
             <div id="row-2-column" class="col-0 col-md-3 options-border">
                 <button type="button" class="btn btn-color w-100 form-control-lg filter-buttton-spacing">Filters</button>
@@ -267,15 +246,10 @@
             </div>
         </div>
         </form>
-    </div>
-    
-    <?php include 'footer.php'; ?>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
-	
+    </div>    
+    <?php include 'footer.php'; ?>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 	
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-
     <script>
         $("#row-2-column button").on("click", function() {
             console.log($(this).siblings());
@@ -320,7 +294,6 @@
 		}
 		xhr.send();
 	};
-
         document.querySelector("#form-id").onsubmit = function() { 
 	    event.preventDefault();
 	    let searchInput = document.querySelector("#product-name").value.trim();
