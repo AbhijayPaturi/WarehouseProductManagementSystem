@@ -13,7 +13,6 @@
     
         $mysqli->set_charset("utf-8");
     
-        // SQL Statement 
         $sql = "SELECT *
         FROM products
         LEFT JOIN categories 
@@ -34,9 +33,6 @@
             echo $mysqli->error;
             exit();
         }
-        // $row = $results->fetch_assoc();
-        // echo "<hr>";
-        // var_dump($row);
     }
     
 ?> 
@@ -56,7 +52,6 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light my-color sticky-top">
-        <!-- Container that is fluid -->
         <div class="container-fluid">
             <a class="navbar-brand nav-brand-padding fs-2" href="home.php"><strong class="navbar-text-color">WPMS</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,7 +120,6 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 bullet-list-div">
-                <!-- <div class="under-img-text"> -->
                     <ul class="bullet-point-list-style under-img-text">
                         <div class="bullet-list-header">Past Clients Who Have Purchased:</div>
                         <?php if($row["client_name"] != null): ?> 
@@ -137,7 +131,6 @@
                             <li class="client-name-style no-purchase-styling">No Purchases <br>As Of Yet.</li>
                         <?php endif; ?>
                     </ul>
-                <!-- </div> -->
             </div>
         </div>
         <div class="row">
@@ -152,8 +145,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-    <!-- <script src="../js/get_photos.js"></script> -->
 
     <script>
         let productName = "<?php echo $_GET["product_name"]; ?>";
@@ -170,7 +161,6 @@
                 query: productName, 
             }
         })
-        // if we get a successful AJAX response
         .done(function(results) {
             console.log(results);
             displayResults(results);
@@ -181,20 +171,11 @@
         });
 
         function displayResults(resultsString) {
-            // Clear the standard image 
             document.querySelector(".js-add-img").replaceChildren();
-
-            // Construct the HTML string 
             let htmlString = `
             <img src="${resultsString.photos[0].src["large"]}" alt="Image of Selected Item">`
-                
-            // Attach the HTML string to the appropriate tag to display the image from the Pexels API 
-            document.querySelector(".js-add-img").innerHTML += htmlString;
-            
+            document.querySelector(".js-add-img").innerHTML += htmlString;  
         };
-
     </script>
-
- 
 </body>
 </html>
