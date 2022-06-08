@@ -24,7 +24,6 @@
 			if ($total_rows > 0) {
 			$found = true;
 		}
-
 		if ($found) {
 			$statement_many = $mysqli->prepare("DELETE FROM products_has_clients WHERE products_id = ?");
 			$statement_many->bind_param("i", $_GET["products_id"]);
@@ -96,7 +95,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container-fluid">
             <div class="row">
                 <div class="col col-12 register-row-text-center">
