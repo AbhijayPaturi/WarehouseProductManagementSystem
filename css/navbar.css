@@ -38,17 +38,14 @@ body {
     margin-left: 20px;
 }
 
-/* The following CSS rules are added only when screen size is 768px and above */
 @media(min-width: 768px) {
     .navbar-text-size {
         font-size: 19px;
     }
 }
 
-/* The following CSS rules are added only when screen size is 992px and above */
 @media(min-width: 992px) {
     .navbar-text-size {
         font-size: 22px;
     }
-
 }
