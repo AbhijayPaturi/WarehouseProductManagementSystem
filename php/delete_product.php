@@ -1,19 +1,16 @@
 <?php 
     require "../config/config.php";
-
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     if ( $mysqli->errno ) {
         echo $mysqli->error;
         exit();
     }
-
     $sql_products = "SELECT products.id AS products_id, name, quantity, warehouse_section, price, conditions.condition FROM products LEFT JOIN conditions ON products.conditions_id = conditions.id;";
     $results_products = $mysqli->query($sql_products);
     if ( $results_products == false ) {
         echo $mysqli->error;
         exit();
     }
-
     $warehouse_aisles_array = array();
     while ( $row = $results_products->fetch_assoc() ) {
         if ( !(in_array($row["warehouse_section"], $warehouse_aisles_array)) ) {
@@ -42,12 +39,9 @@
         echo $mysqli->error;
         exit();
     }
-
     $mysqli->close();
-
     $i = 0;
     $j = 0;
-
 ?>
 
 <!DOCTYPE html>
@@ -162,7 +156,6 @@
                 </div>       
             </div>
             <?php $results_products->data_seek(0); ?>
-            <!-- Product Information -->
             <div class="col-12 col-md-9 prod-rows-border js-ajax">
                 <?php while( ($row = $results_products->fetch_assoc()) ):?>	
                     <div class="row">
@@ -199,13 +192,9 @@
         </div>
         </form>
     </div>
-
-    <?php include 'footer.php'; ?>
-    
+    <?php include 'footer.php'; ?>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
     <script>
         $("#row-2-column button").on("click", function() {
             console.log($(this).siblings());
@@ -233,7 +222,6 @@
             $(this).next().slideToggle(500, function() {
             });
         });
-
 	function ajaxGet(endpointUrl, returnFunction){
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', endpointUrl, true);
@@ -250,7 +238,6 @@
 		}
 		xhr.send();
 	};
-
         document.querySelector("#form-id").onsubmit = function() { 
 		event.preventDefault();
 		let searchInput = document.querySelector("#product-name").value.trim();
@@ -277,7 +264,6 @@
 						</div>
 					    </div>   
 					    <div class="col-12 col-md-9 prod-rows-center">
-						<!-- Sub-Sub-Row -->
 						<div class="row">
 						    <div class="col-12 prod-details-styling">
 							<a class="product-name-styling" href="product_details.php?products_id=${jsResults[i].id}&product_name=${jsResults[i].name}>"><strong>${jsResults[i].name}</strong></a>
@@ -305,7 +291,6 @@
 				resultsList.innerHTML += htmlString;
 			}});
 	   }
-
     </script>
 </body>
 </html>
