@@ -18,4 +18,4 @@ Compatible with all screen sizes.
 [@AbhijayPaturi](https://github.com/AbhijayPaturi)
 
 ## Inspiration 
-Observation of warehouses practices while interning @ [Tradefull] (https://www.linkedin.com/company/tradefull/mycompany/verification/)
+Observation of warehouses practices while interning @ Tradefull (https://www.linkedin.com/company/tradefull/mycompany/verification/)
